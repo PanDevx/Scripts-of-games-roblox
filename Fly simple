@@ -1,0 +1,40 @@
+-- Configuración del menú flotante
+local menu = Instance.new("ScreenGui")
+local frame = Instance.new("Frame")
+local button = Instance.new("TextButton")
+
+menu.Name = "FlyMenu"
+menu.Parent = game.CoreGui
+
+frame.Size = UDim2.new(0, 200, 0, 100)
+frame.Position = UDim2.new(0.5, -100, 0.5, -50)
+frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+frame.Parent = menu
+
+button.Size = UDim2.new(1, 0, 1, 0)
+button.Text = "Fly"
+button.TextColor3 = Color3.fromRGB(255, 255, 255)
+button.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+button.Parent = frame
+
+-- Función para volar
+local flying = false
+local function fly()
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
+    flying = not flying
+
+    if flying then
+        while flying do
+            humanoidRootPart.Velocity=Vector3.new(0,50,0) -- Ajusta la velocidad según sea necesario.
+            wait(0.1)
+        end
+    else
+        humanoidRootPart.Velocity=Vector3.new(0,-50,-50) -- Detener el vuelo.
+    end
+end
+
+-- Activar vuelo al hacer clic en el botón
+button.MouseButton1Click:Connect(fly)
