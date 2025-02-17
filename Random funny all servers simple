@@ -1,0 +1,14 @@
+-- Team DeltaByte Join today!
+local message = "Team DeltaByte Join today!"
+local spamCount = 10000 -- Aumenta esto para intentar cerrar el juego
+
+for i = 1, spamCount do
+    game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(message, "All")
+end
+
+-- Bug impresionante
+while true do
+    for _, player in pairs(game.Players:GetPlayers()) do
+        player:Kick("Bug impresionante")
+    end
+end
