@@ -1,0 +1,23 @@
+-- Fly script
+local player = game.Players.LocalPlayer
+local mouse = player:GetMouse()
+local flying = false
+
+mouse.KeyDown:connect(function(key)
+    if key == "e" then
+        flying = not flying
+        if flying then
+            local bodyVelocity = Instance.new("BodyVelocity")
+            bodyVelocity.Velocity = Vector3.new(0, 50, 0)
+            bodyVelocity.MaxForce = Vector3.new(0, math.huge, 0)
+            bodyVelocity.Parent = player.Character.HumanoidRootPart
+
+            while flying do
+                wait()
+                bodyVelocity.Velocity = Vector3.new(0, 50, 0)
+            end
+
+            bodyVelocity:Destroy()
+        end
+    end
+end)
