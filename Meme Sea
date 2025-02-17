@@ -1,0 +1,54 @@
+-- Configuración del menú flotante
+local menu = Instance.new("ScreenGui")
+local frame = Instance.new("Frame")
+local button = Instance.new("TextButton")
+
+menu.Name = "MemeSeaAutoFarm"
+menu.Parent = game.CoreGui
+
+frame.Size = UDim2.new(0, 200, 0, 100)
+frame.Position = UDim2.new(0.5, -100, 0.5, -50)
+frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+frame.Parent = menu
+
+button.Size = UDim2.new(1, 0, 1, 0)
+button.Text = "Autofarm"
+button.TextColor3 = Color3.fromRGB(255, 0, 0)
+button.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+button.Parent = frame
+
+-- Función de autofarm
+local function autofarm()
+    while true do
+        for _, npc in pairs(game.Workspace.NPCs:GetChildren()) do
+            if npc:FindFirstChild("Humanoid") then
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = npc.HumanoidRootPart.CFrame
+                wait(0.1)
+                -- Atacar al NPC (ajusta según el juego)
+            end
+        end
+        wait(1) -- Espera antes de repetir
+    end
+end
+
+-- Activar autofarm al hacer clic en el botón
+button.MouseButton1Click:Connect(function()
+    spawn(autofarm)
+end)
+
+-- Texto de crédito
+local creditText = Instance.new("TextLabel")
+creditText.Size = UDim2.new(1, 0, 0.1, 0)
+creditText.Position = UDim2.new(0, 0, -0.1, 0)
+creditText.Text = "powered by DeltaByte"
+creditText.TextColor3 = Color3.fromRGB(255, 255, 255)
+creditText.BackgroundTransparency = 1
+creditText.Parent = frame
+
+-- Icono del menú flotante (cara del diablo)
+local iconImageLabel = Instance.new("ImageLabel")
+iconImageLabel.Size = UDim2.new(0.2, 0, 0.2, 0)
+iconImageLabel.Position = UDim2.new(-0.25, -10,-10,-10) -- Ajusta la posición según sea necesario
+iconImageLabel.Image ="http://www.roblox.com/asset/?id=123456789" -- Reemplaza con la ID de la imagen del diablo que desees usar.
+iconImageLabel.BackgroundTransparency=1 
+iconImageLabel.Parent=frame 
