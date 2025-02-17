@@ -52,3 +52,24 @@ iconImageLabel.Position = UDim2.new(-0.25, -10,-10,-10) -- Ajusta la posición s
 iconImageLabel.Image ="http://www.roblox.com/asset/?id=123456789" -- Reemplaza con la ID de la imagen del diablo que desees usar.
 iconImageLabel.BackgroundTransparency=1 
 iconImageLabel.Parent=frame 
+-- Función para subir de nivel automáticamente
+local function autoLevelUp()
+    while true do
+        -- Asegúrate de que el jugador esté en el juego y tenga un nivel
+        if game.Players.LocalPlayer and game.Players.LocalPlayer:FindFirstChild("leaderstats") then
+            local level = game.Players.LocalPlayer.leaderstats.Level.Value
+
+            -- Incrementa el nivel del jugador
+            game.Players.LocalPlayer.leaderstats.Level.Value = level + 1
+
+            -- Espera antes de repetir
+            wait(1)
+        end
+    end
+end
+
+-- Activar autoLevelUp al hacer clic en el botón
+button.MouseButton1Click:Connect(function()
+    spawn(autofarm)
+    spawn(autoLevelUp)
+end)
