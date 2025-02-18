@@ -1,0 +1,9 @@
+local Players = game:GetService("Players")
+
+Players.PlayerAdded:Connect(function(player)
+    player.Chatted:Connect(function(message)
+        -- Aquí puedes filtrar o modificar el mensaje si lo deseas
+        local filteredMessage = message:gsub("%*", "") -- Elimina los asteriscos de censura
+        print(player.Name .. ": " .. filteredMessage)
+    end)
+end)
