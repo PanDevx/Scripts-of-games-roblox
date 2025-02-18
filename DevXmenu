@@ -1,0 +1,108 @@
+-- DevXmenu
+local message = "DevXmenu"
+local subMessage = "The Best scripts"
+
+local gui = Instance.new("ScreenGui")
+local frame = Instance.new("Frame")
+local label = Instance.new("TextLabel")
+
+gui.Parent = game.CoreGui
+
+frame.Parent = gui
+frame.Size = UDim2.new(0, 200, 0, 100)
+frame.Position = UDim2.new(0.5, -100, 0.5, -50)
+frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+frame.BorderSizePixel = 0
+
+label.Parent= frame 
+label.Size= UDim2.new (1 ,0 ,1 ,0 )
+label.TextColor3= Color3.fromRGB (255 ,255 ,255 )
+label.TextStrokeTransparency= 0 
+label.TextScaled= true 
+label.TextWrapped= true 
+label.TextXAlignment= Enum.TextXAlignment.Center 
+label.TextYAlignment= Enum.TextYAlignment.Center 
+
+label .Text= message 
+
+wait (2 )
+
+label .Text=subMessage 
+
+wait (2 )
+
+gui :Destroy ()
+
+-- DevX menu 
+local menuGui=Instance .new ("ScreenGui" )
+local menuFrame=Instance .new ("Frame" )
+local menuLabel=Instance .new ("TextLabel" )
+
+menuGui .Parent=game .CoreGui 
+
+menuFrame .Parent=menuGui 
+menuFrame .Size=UDim2 .new (0 ,300 ,0 ,400 )
+menuFrame.Position=UDim2.new(0.5,-150,-1,-200)
+menuFrame.BackgroundColor3= Color3.fromRGB (30 ,30 ,30 )
+menuFrame.BorderSizePixel=1 
+menuFrame.BorderColor3= Color3.fromRGB (255 ,255 ,255 )
+
+-- Add animations 
+game:GetService("TweenService"):Create(menuFrame,TweenInfo.new(1),{Position=UDim2.new(0.5,-150,-200)}):Play()
+wait(1)
+game:GetService("TweenService"):Create(menuFrame,TweenInfo.new(1),{Position=UDim2.new(0.5,-150,200)}):Play()
+
+-- Make the menu draggable
+local dragging
+local dragInput
+local dragStart
+local startPos
+
+function update(input)
+    local delta=input.Position-dragStart
+    menuFrame.Position=startPos+UDim2.new(0,delta.X,0,delta.Y)
+end
+
+menuFrame.InputBegan:Connect(function(input)
+    if input.UserInputType==Enum.UserInputType.MouseButton1 then
+        dragging=true
+        dragStart=input.Position
+        startPos=menuFrame.Position
+        
+        input.Changed:Connect(function()
+            if input.UserInputState==Enum.UserInputState.End then
+                dragging=false
+            end
+        end)
+    end
+end)
+
+menuFrame.InputChanged:Connect(function(input)
+    if input.UserInputType==Enum.UserInputType.MouseMovement then
+        dragInput=input
+    end
+end)
+
+game:GetService("UserInputService").InputChanged:Connect(function(input)
+    if input==dragInput and dragging then
+        update(input)
+    end
+    
+end)
+
+-- Add buttons for each script 
+local scripts={
+    {name="meme sea",text="loadstring(game:HttpGet('https://raw.githubusercontent.com/Omgshit/Scripts/main/MainLoader.lua'))()"},
+    {name="Murder mistery",text="loadstring(game:HttpGet('https://raw.githubusercontent.com/Teamhydro31/testttt/refs/heads/main/mm2hydrofinal'))()"},
+    {name="Leyends of speed ⚡",text="loadstring(game:HttpGet('https://raw.githubusercontent.com/StupidProAArsenal/main/main/Legenos%20of%20speedos'))()"},
+    {name="infinty yield",text="loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()"},
+    {name="Neko FE",text="loadstring(game:HttpGet('https://raw.githubusercontent.com/Gazer-Ha/Neko-v1/main/Extremely%20Broken'))()"},
+    {name="Evade",text="loadstring(game:HttpGet('https://raw.githubusercontent.com/9Strew/roblox/main/gamescripts/evade.lua'))()"},
+    {name="Fisch",text="loadstring(game:HttpGet('https://raw.githubusercontent.com/Vixx77/Eternal/main/EternalHub_Fish'))()"},
+    {name="Blox fruits",text="loadstring(game:HttpGet('https://raw.githubusercontent.com/AdelOnTheTop/Adel-Hub/main/Main.lua'))()"}
+}
+
+for i,v in pairs(scripts) do 
+    local button=Instance .new ("TextButton" )
+    
+end
